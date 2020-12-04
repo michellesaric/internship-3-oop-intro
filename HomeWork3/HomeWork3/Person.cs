@@ -6,7 +6,7 @@ namespace PrvaVjezba
 {
     class Person
     {
-        public Person(string firstName, string lastName, int oib, int phoneNumber)
+        public Person(string firstName, string lastName, string oib, string phoneNumber)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -16,13 +16,13 @@ namespace PrvaVjezba
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int OIB { get; set; }
+        public string OIB { get; set; }
 
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public void PrintingPerson()
         {
-            Console.Write(FirstName + " - " + LastName + " - " + PhoneNumber);
+            Console.WriteLine(FirstName + " - " + LastName + " - " + PhoneNumber);
         }
 
     }
