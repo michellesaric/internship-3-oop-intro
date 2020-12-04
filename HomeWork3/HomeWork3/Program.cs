@@ -97,7 +97,7 @@ namespace PrvaVjezba
                         return;
 
                     toGoAgain = CheckingForSameId(eventData, id);
-                    if (toGoAgain == true)
+                    if (toGoAgain)
                     {
                         Console.WriteLine("The id you wrote is already taken for some other event. If you would like to try and type in a different id, type yes. Any other input will lead to the main menu");
                         decision = Console.ReadLine();
@@ -522,7 +522,7 @@ namespace PrvaVjezba
                             toGoAgain = true;
                         }
                     }
-                    if (toGoAgain == true)
+                    if (toGoAgain)
                     {
                         Console.WriteLine("If you would like to try and type in a different oib, type yes. Any other input will lead to the main menu");
                         decision = Console.ReadLine();
@@ -569,10 +569,19 @@ namespace PrvaVjezba
         static void RemovingAPersonFromEvent(Dictionary<Event, List<Person>> eventData)
         {
             var oib = "";
+            var id = 0;
             var toGoAgain = false;
             var decision = "";
             Console.WriteLine("Please enter the id of the event to which you would like to remove a person from:");
-            var id = int.Parse(Console.ReadLine());
+            try
+            {
+                id = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("You didn't write a number, you will be relocated to the main menu");
+                return;
+            }
             var _isThereAnId = CheckingForSameId(eventData, id);
 
             if (!_isThereAnId)
@@ -602,7 +611,7 @@ namespace PrvaVjezba
                             toGoAgain = true;
                         }
                     }
-                    if (toGoAgain == true)
+                    if (toGoAgain)
                     {
                         Console.WriteLine("If you would like to try and type in a different oib, type yes. Any other input will lead to the main menu");
                         decision = Console.ReadLine();
@@ -620,7 +629,7 @@ namespace PrvaVjezba
                 while (toGoAgain);
                 toGoAgain = RemovingThePerson(eventData, id, oib);
 
-                if (toGoAgain == true)
+                if (toGoAgain)
                 {
                     Console.WriteLine("The oib you wrote was erased from the event. Would you like to remove another person from the event? Type yes if you want to, any other input will send you to main menu.");
                     decision = Console.ReadLine();
@@ -855,6 +864,7 @@ namespace PrvaVjezba
             var type = eventType.False;
             var toGoAgain = false;
             var decision = "";
+            var typeOfEvent = 0;
             do
             {
                 Console.WriteLine("Please choose a type of event:");
@@ -862,8 +872,16 @@ namespace PrvaVjezba
                 Console.WriteLine("2 - Lecture");
                 Console.WriteLine("3 - Concert");
                 Console.WriteLine("4 - Study Session");
-                var typeOfEvent = int.Parse(Console.ReadLine());
-
+                
+                
+                try
+                {
+                    typeOfEvent = int.Parse(Console.ReadLine());
+                }
+                catch(FormatException)
+                {
+                    Console.WriteLine("You haven't typed in a number.");
+                }
                 switch (typeOfEvent)
                 {
                     case 1:
